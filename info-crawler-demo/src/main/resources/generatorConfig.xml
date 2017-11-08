@@ -25,12 +25,12 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.asiainfo.biapp.aiop.web.dao.mapper"
+        <sqlMapGenerator targetPackage="com.asiainfo.biapp.infocrawlerdemo.dao.mapper"
                          targetProject="info-crawler-demo">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.asiainfo.biapp.aiop.web.dao.mapper"
+        <javaClientGenerator targetPackage="com.asiainfo.biapp.infocrawlerdemo.dao.mapper"
                              targetProject="info-crawler-demo" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -42,12 +42,6 @@
         </table>
         
         <table tableName="template_code" domainObjectName="TemplateCode"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-        
-        <table tableName="template" domainObjectName="Template"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

@@ -6,12 +6,15 @@
 
 package com.asiainfo.biapp.infocrawlerdemo.thread;
 
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 import com.asiainfo.biapp.infocrawlerdemo.model.ClientInfo;
+import com.asiainfo.biapp.infocrawlerdemo.model.CodeInfo;
 import com.asiainfo.biapp.infocrawlerdemo.model.CrawlerInfo;
 import com.asiainfo.biapp.infocrawlerdemo.ssh.SSHExcute;
 import com.asiainfo.biapp.infocrawlerdemo.ssh.SSHSessionFactory;
+import com.asiainfo.biapp.infocrawlerdemo.template.TemplateTool;
 import com.jcraft.jsch.Session;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +39,8 @@ public class CrawlerThread implements Runnable {
 
     private Session session;
 
+    private TemplateTool templateTool = TemplateTool.getInstance();
+
     public CrawlerThread(ClientInfo info) {
         session = SSHSessionFactory.getSession(info.getIp(), info.getPort(), info.getUserName(), info.getPassword());
         sshExcute = new SSHExcute(session);
@@ -50,6 +55,8 @@ public class CrawlerThread implements Runnable {
                 BlockingQueue<CrawlerInfo> queue = info.getQueue();
 
                 CrawlerInfo crawlerInfo = queue.take();
+
+                List<CodeInfo> codeInfos = templateTool.getCodes(crawlerInfo);
 
 
             } catch (InterruptedException e) {

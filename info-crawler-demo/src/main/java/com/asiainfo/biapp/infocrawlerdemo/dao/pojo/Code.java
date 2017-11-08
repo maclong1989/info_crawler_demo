@@ -9,6 +9,8 @@ public class Code {
 
     private String codeType;
 
+    private String codeInfo;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Code {
 
     public void setCodeType(String codeType) {
         this.codeType = codeType == null ? null : codeType.trim();
+    }
+
+    public String getCodeInfo() {
+        return codeInfo;
+    }
+
+    public void setCodeInfo(String codeInfo) {
+        this.codeInfo = codeInfo == null ? null : codeInfo.trim();
     }
 }

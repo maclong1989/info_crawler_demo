@@ -1,4 +1,4 @@
-package com.asiainfo.biapp.aiop.web.dao.mapper;
+package com.asiainfo.biapp.infocrawlerdemo.dao.mapper;
 
 import com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Code;
 

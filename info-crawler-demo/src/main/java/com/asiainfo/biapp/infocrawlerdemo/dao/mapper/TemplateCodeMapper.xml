@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.biapp.infocrawlerdemo.dao.mapper.TemplateCodeMapper">
+  <resultMap id="BaseResultMap" type="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.TemplateCode">
+    <id column="template_id" jdbcType="INTEGER" property="templateId" />
+    <id column="code_id" jdbcType="INTEGER" property="codeId" />
+    <result column="code_name" jdbcType="VARCHAR" property="codeName" />
+    <result column="code_info" jdbcType="VARCHAR" property="codeInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    template_id, code_id, code_name, code_info
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.TemplateCodeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from template_code
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and code_id = #{codeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.TemplateCodeKey">
+    delete from template_code
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and code_id = #{codeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.TemplateCode">
+    insert into template_code (template_id, code_id, code_name, 
+      code_info)
+    values (#{templateId,jdbcType=INTEGER}, #{codeId,jdbcType=INTEGER}, #{codeName,jdbcType=VARCHAR}, 
+      #{codeInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.TemplateCode">
+    insert into template_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="templateId != null">
+        template_id,
+      </if>
+      <if test="codeId != null">
+        code_id,
+      </if>
+      <if test="codeName != null">
+        code_name,
+      </if>
+      <if test="codeInfo != null">
+        code_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="templateId != null">
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="codeId != null">
+        #{codeId,jdbcType=INTEGER},
+      </if>
+      <if test="codeName != null">
+        #{codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeInfo != null">
+        #{codeInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.TemplateCode">
+    update template_code
+    <set>
+      <if test="codeName != null">
+        code_name = #{codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeInfo != null">
+        code_info = #{codeInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and code_id = #{codeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.TemplateCode">
+    update template_code
+    set code_name = #{codeName,jdbcType=VARCHAR},
+      code_info = #{codeInfo,jdbcType=VARCHAR}
+    where template_id = #{templateId,jdbcType=INTEGER}
+      and code_id = #{codeId,jdbcType=INTEGER}
+  </update>
+</mapper>

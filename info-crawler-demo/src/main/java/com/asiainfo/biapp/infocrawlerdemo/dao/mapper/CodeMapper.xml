@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.asiainfo.biapp.aiop.web.dao.mapper.CodeMapper">
+<mapper namespace="com.asiainfo.biapp.infocrawlerdemo.dao.mapper.CodeMapper">
   <resultMap id="BaseResultMap" type="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Code">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="fix" jdbcType="VARCHAR" property="fix" />
     <result column="code_type" jdbcType="CHAR" property="codeType" />
+    <result column="code_info" jdbcType="VARCHAR" property="codeInfo" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, code, fix, code_type
+    id, code, fix, code_type, code_info
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Code">
     insert into code (id, code, fix, 
-      code_type)
+      code_type, code_info)
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{fix,jdbcType=VARCHAR}, 
-      #{codeType,jdbcType=CHAR})
+      #{codeType,jdbcType=CHAR}, #{codeInfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Code">
     insert into code
@@ -41,6 +42,9 @@
       <if test="codeType != null">
         code_type,
       </if>
+      <if test="codeInfo != null">
+        code_info,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -54,6 +58,9 @@
       </if>
       <if test="codeType != null">
         #{codeType,jdbcType=CHAR},
+      </if>
+      <if test="codeInfo != null">
+        #{codeInfo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="codeType != null">
         code_type = #{codeType,jdbcType=CHAR},
       </if>
+      <if test="codeInfo != null">
+        code_info = #{codeInfo,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -76,7 +86,8 @@
     update code
     set code = #{code,jdbcType=VARCHAR},
       fix = #{fix,jdbcType=VARCHAR},
-      code_type = #{codeType,jdbcType=CHAR}
+      code_type = #{codeType,jdbcType=CHAR},
+      code_info = #{codeInfo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

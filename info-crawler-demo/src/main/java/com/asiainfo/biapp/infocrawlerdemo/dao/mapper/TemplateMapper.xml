@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.asiainfo.biapp.aiop.web.dao.mapper.TemplateMapper">
+<mapper namespace="com.asiainfo.biapp.infocrawlerdemo.dao.mapper.TemplateMapper">
   <resultMap id="BaseResultMap" type="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Template">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="template_name" jdbcType="VARCHAR" property="templateName" />
@@ -79,4 +79,26 @@
       template_type = #{templateType,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+  </select>
+  <resultMap id="CodeInfoMap" type="com.asiainfo.biapp.infocrawlerdemo.model.CodeInfo">
+    <result column="code_name" jdbcType="VARCHAR" property="codeName" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="fix" jdbcType="VARCHAR" property="fix" />
+    <result column="code_type" jdbcType="CHAR" property="codeType" />
+  </resultMap>
+  <select id="selectCodeInfo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    	a.code_name,
+    	b.code,
+    	b.fix,
+    	b.code_type
+   	form template_code a
+    inner join code b
+    on a.code_id = b.id
+    where
+    	a.template_id = ${templateId}
+  </select>
 </mapper>
