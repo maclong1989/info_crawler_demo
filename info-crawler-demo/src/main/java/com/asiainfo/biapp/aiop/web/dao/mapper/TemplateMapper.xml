@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.biapp.aiop.web.dao.mapper.TemplateMapper">
+  <resultMap id="BaseResultMap" type="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Template">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="template_name" jdbcType="VARCHAR" property="templateName" />
+    <result column="decide_class" jdbcType="VARCHAR" property="decideClass" />
+    <result column="template_type" jdbcType="CHAR" property="templateType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, template_name, decide_class, template_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from template
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from template
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Template">
+    insert into template (id, template_name, decide_class, 
+      template_type)
+    values (#{id,jdbcType=INTEGER}, #{templateName,jdbcType=VARCHAR}, #{decideClass,jdbcType=VARCHAR}, 
+      #{templateType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Template">
+    insert into template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="templateName != null">
+        template_name,
+      </if>
+      <if test="decideClass != null">
+        decide_class,
+      </if>
+      <if test="templateType != null">
+        template_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="decideClass != null">
+        #{decideClass,jdbcType=VARCHAR},
+      </if>
+      <if test="templateType != null">
+        #{templateType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Template">
+    update template
+    <set>
+      <if test="templateName != null">
+        template_name = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="decideClass != null">
+        decide_class = #{decideClass,jdbcType=VARCHAR},
+      </if>
+      <if test="templateType != null">
+        template_type = #{templateType,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.asiainfo.biapp.infocrawlerdemo.dao.pojo.Template">
+    update template
+    set template_name = #{templateName,jdbcType=VARCHAR},
+      decide_class = #{decideClass,jdbcType=VARCHAR},
+      template_type = #{templateType,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
