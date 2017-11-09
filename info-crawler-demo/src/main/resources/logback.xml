@@ -11,8 +11,7 @@
         <property name="SYS_LOG_DIR" value="/tmp" />  
     	<property name="LOG_FILE" value="aiop.log" />  
     	<property name="fileLayoutPattern"  
-        value="%-20(%d{yyyyMMdd_HH:mm:ss.SSS} [%logger{10}][%thread] [%-4relative])  
-                [%X{hostName} %X{requestId} %X{processId} %X{service.timing} ][%level] %msg%n" />  
+        value="%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] [%level] %logger -%msg%n" />  
         <!-- 日志最大的历史 30天 -->  
         <property name="maxHistory" value="30"/>  
       
@@ -20,7 +19,7 @@
         <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">  
             <!-- 对日志进行格式化 -->  
             <encoder>  
-                <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger -%msg%n</pattern>  
+                <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] [%-5level] %logger -%msg%n</pattern>  
             </encoder>  
         </appender>  
         

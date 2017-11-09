@@ -33,5 +33,13 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
+  data:
+    elasticsearch:
+      # 集群名
+      cluster-name: elasticsearch
+      #配置es节点信息，逗号分隔，如果没有指定，则启动ClientNode
+      cluster-nodes: 10.1.253.98:9300
+      #索引名
+      index-name: test
 
 
