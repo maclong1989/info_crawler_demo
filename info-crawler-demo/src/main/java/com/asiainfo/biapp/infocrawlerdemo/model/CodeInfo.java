@@ -34,6 +34,8 @@ public class CodeInfo {
 
     private String codeType;
 
+    private String codeInfo;
+
     private List<String> results;
 
     private Date time;

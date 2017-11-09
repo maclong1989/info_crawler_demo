@@ -65,7 +65,8 @@ public class CrawlerThread implements Runnable {
                 Map<String, CodeInfo> resultMap = excuteTool.excute(crawlerInfo, codeInfos, sshExcute);
 
                 for (Map.Entry<String, CodeInfo> result : resultMap.entrySet()) {
-                    log.info("crawlerdInfo:key:{},velue:{}.", result.getKey(), result.getValue().getResults());
+                    log.info("crawlerdInfo:key:{},velue:{},info:{}.", result.getKey(), result.getValue().getResults(),
+                                    result.getValue().getCodeInfo());
                 }
 
             } catch (InterruptedException e) {
