@@ -82,6 +82,7 @@
   <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+    from template
   </select>
   <resultMap id="CodeInfoMap" type="com.asiainfo.biapp.infocrawlerdemo.model.CodeInfo">
     <result column="code_name" jdbcType="VARCHAR" property="codeName" />
@@ -89,16 +90,16 @@
     <result column="fix" jdbcType="VARCHAR" property="fix" />
     <result column="code_type" jdbcType="CHAR" property="codeType" />
   </resultMap>
-  <select id="selectCodeInfo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectCodeInfo" parameterType="java.lang.Integer" resultMap="CodeInfoMap">
     select
     	a.code_name,
     	b.code,
     	b.fix,
     	b.code_type
-   	form template_code a
+   	from template_code a
     inner join code b
     on a.code_id = b.id
     where
-    	a.template_id = ${templateId}
+    	a.template_id = #{templateId}
   </select>
 </mapper>

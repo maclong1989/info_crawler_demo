@@ -1,6 +1,5 @@
 package com.asiainfo.biapp.infocrawlerdemo.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,21 +53,11 @@ public class CrawlerApi {
 
             controlFactory.sendTask(crawlerInfo);
 
+            responce.setCode("200");
         } catch (Exception e) {
             log.error("API error!", e);
+            responce.setCode("500");
         }
-
-        return responce;
-    }
-
-    @ApiOperation(value = "测试", notes = "测试")
-    @GetMapping(value = "/test")
-    @ResponseBody
-    public CrawlerResponce test() {
-
-        CrawlerResponce responce = new CrawlerResponce();
-
-        log.info("test!");
 
         return responce;
     }

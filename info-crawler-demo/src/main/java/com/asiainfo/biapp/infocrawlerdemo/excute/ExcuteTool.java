@@ -6,11 +6,16 @@
 
 package com.asiainfo.biapp.infocrawlerdemo.excute;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.asiainfo.biapp.infocrawlerdemo.model.CodeInfo;
 import com.asiainfo.biapp.infocrawlerdemo.model.CrawlerInfo;
+import com.asiainfo.biapp.infocrawlerdemo.ssh.SSHExcute;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * ClassName:ExcuteTool <br/>
@@ -23,19 +28,42 @@ import com.asiainfo.biapp.infocrawlerdemo.model.CrawlerInfo;
  * @since JDK 1.6
  * @see
  */
+@Slf4j
 public class ExcuteTool {
 
     private static ExcuteTool excuteTool = new ExcuteTool();
 
     private ExcuteTool() {}
 
-    public ExcuteTool getExcuteTool() {
+    public static ExcuteTool getInstance() {
         return excuteTool;
     }
 
-    public Map<String, String> excute(CrawlerInfo crawlerInfo, List<CodeInfo> codeInfos) {
+    public Map<String, CodeInfo> excute(CrawlerInfo crawlerInfo, List<CodeInfo> codeInfos, SSHExcute sshExcute) {
 
-        return null;
+        Map<String, CodeInfo> resultMap = new HashMap<>();
+
+        for (CodeInfo codeinfo : codeInfos) {
+
+            if ("0".equals(codeinfo.getCodeType())) {
+
+                codeinfo.setTime(new Date());
+                int ret = sshExcute.excute(codeinfo.getCode());
+
+                if (ret == -1) {
+                    log.error("SSH excute error!");
+                    continue;
+                }
+
+                List<String> retStr = sshExcute.getStandardOutput();
+
+                codeinfo.setResults(retStr);
+
+                resultMap.put(codeinfo.getCodeName(), codeinfo);
+            }
+        }
+
+        return resultMap;
     }
 
 }

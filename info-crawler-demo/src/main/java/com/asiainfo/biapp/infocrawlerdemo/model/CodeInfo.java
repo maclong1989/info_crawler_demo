@@ -7,6 +7,9 @@
 
 package com.asiainfo.biapp.infocrawlerdemo.model;
 
+import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -30,6 +33,10 @@ public class CodeInfo {
     private String fix;
 
     private String codeType;
+
+    private List<String> results;
+
+    private Date time;
 
 }
 

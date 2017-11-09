@@ -7,8 +7,10 @@
 package com.asiainfo.biapp.infocrawlerdemo.thread;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
+import com.asiainfo.biapp.infocrawlerdemo.excute.ExcuteTool;
 import com.asiainfo.biapp.infocrawlerdemo.model.ClientInfo;
 import com.asiainfo.biapp.infocrawlerdemo.model.CodeInfo;
 import com.asiainfo.biapp.infocrawlerdemo.model.CrawlerInfo;
@@ -41,6 +43,8 @@ public class CrawlerThread implements Runnable {
 
     private TemplateTool templateTool = TemplateTool.getInstance();
 
+    private ExcuteTool excuteTool = ExcuteTool.getInstance();
+
     public CrawlerThread(ClientInfo info) {
         session = SSHSessionFactory.getSession(info.getIp(), info.getPort(), info.getUserName(), info.getPassword());
         sshExcute = new SSHExcute(session);
@@ -58,6 +62,11 @@ public class CrawlerThread implements Runnable {
 
                 List<CodeInfo> codeInfos = templateTool.getCodes(crawlerInfo);
 
+                Map<String, CodeInfo> resultMap = excuteTool.excute(crawlerInfo, codeInfos, sshExcute);
+
+                for (Map.Entry<String, CodeInfo> result : resultMap.entrySet()) {
+                    log.info("crawlerdInfo:key:{},velue:{}.", result.getKey(), result.getValue().getResults());
+                }
 
             } catch (InterruptedException e) {
                 log.error("take crawlerInfo interrupted!", e);

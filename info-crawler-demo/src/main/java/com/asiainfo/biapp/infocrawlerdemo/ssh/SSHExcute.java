@@ -67,6 +67,7 @@ public class SSHExcute {
             // 关闭通道
             channelExec.disconnect();
 
+            returnCode = 0;
         } catch (JSchException e) {
             e.printStackTrace();
         } catch (Exception e) {
